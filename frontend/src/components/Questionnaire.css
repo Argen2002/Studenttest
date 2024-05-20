@@ -1,0 +1,90 @@
+/* src/components/Questionnaire.css */
+.questionnaire-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.questionnaire-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.question h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.answers {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.answers button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.answers button.selected {
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.answers button:hover {
+    background-color: #e0e0e0;
+}
+
+.pagination {
+    margin-bottom: 20px;
+}
+
+.pagination-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.pagination-buttons button {
+    margin: 5px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.pagination-buttons button.active {
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.pagination-buttons button:hover {
+    background-color: #e0e0e0;
+}
+
+.submit-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #28a745;
+    border: 1px solid #28a745;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #218838;
+}
