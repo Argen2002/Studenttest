@@ -1,17 +1,31 @@
 // src/components/NavBar.js
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './NavBar.css'; // Подключаем CSS файл
 
 const NavBar = () => {
     return (
-        <nav>
-            <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/register">Register</Link></li>
-                <li><Link to="/login">Login</Link></li>
-                <li><Link to="/questionnaire">Questionnaire</Link></li>
-                <li><Link to="/result">Result</Link></li>
+        <nav className="navbar">
+            <Link to="/" className="navbar-logo">LOGO</Link>
+            <ul className="navbar-links">
+                <li><Link to="/">Главная</Link></li>
+                <li className="dropdown">
+                    <span className="dropdown-title">Тесты</span>
+                    <div className="dropdown-content">
+                        <Link to="/questionnaire">Тесты</Link>
+                        <Link to="/">Тесты профессии</Link>
+                        <Link to="/result">Результаты</Link>
+                    </div>
+                </li>
+                <li><Link to="/universities">Вузы</Link></li>
+                <li><Link to="/about">О нас</Link></li>
+                <li><Link to="/contacts">Контакты</Link></li>
             </ul>
+
+            <div className="navbar-account">
+                <span>Личный кабинет</span>
+                <button className="navbar-login-button"><Link to="/login">Войти</Link></button>
+            </div>
         </nav>
     );
 };

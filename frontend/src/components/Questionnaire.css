@@ -1,90 +1,59 @@
-/* src/components/Questionnaire.css */
+/* src/pages/Questionnaire.css */
 .questionnaire-container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #fff;
+    background-color: #f9f9f9;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.questionnaire-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
     text-align: center;
 }
 
-.questionnaire-container h1 {
-    font-size: 24px;
+.question {
     margin-bottom: 20px;
 }
 
-.question h2 {
+.question h4 {
     font-size: 18px;
     margin-bottom: 10px;
 }
 
 .answers {
     display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
+    flex-direction: column;
 }
 
-.answers button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.answers button.selected {
-    background-color: #ffc107;
-    border-color: #ffc107;
-}
-
-.answers button:hover {
-    background-color: #e0e0e0;
-}
-
-.pagination {
-    margin-bottom: 20px;
-}
-
-.pagination-buttons {
+.answer {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
-.pagination-buttons button {
-    margin: 5px;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f0f0f0;
-    cursor: pointer;
-    transition: background-color 0.3s;
+.answer input {
+    margin-right: 10px;
 }
 
-.pagination-buttons button.active {
-    background-color: #ffc107;
-    border-color: #ffc107;
+.submit-section {
+    text-align: center;
+    margin-top: 20px;
 }
 
-.pagination-buttons button:hover {
-    background-color: #e0e0e0;
-}
-
-.submit-button {
+.submit-section button {
     padding: 10px 20px;
-    font-size: 16px;
-    background-color: #28a745;
-    border: 1px solid #28a745;
+    background-color: #007BFF;
+    color: white;
+    border: none;
     border-radius: 5px;
-    color: #fff;
     cursor: pointer;
-    transition: background-color 0.3s;
+    font-size: 16px;
 }
 
-.submit-button:hover {
-    background-color: #218838;
+.submit-section button:hover {
+    background-color: #0056b3;
 }

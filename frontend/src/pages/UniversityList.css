@@ -1,0 +1,76 @@
+/* src/components/UniversityList.css */
+.university-list {
+    text-align: center;
+    padding: 20px;
+}
+
+.search-bar {
+    margin: 20px 0;
+    padding: 10px;
+    width: 50%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.university-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.university-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 20%; /* Adjusted to fit 4 in a row */
+    overflow: hidden;
+    transition: transform 0.2s;
+    text-align: left;
+}
+
+.university-card:hover {
+    transform: scale(1.05);
+}
+
+.university-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.university-info {
+    padding: 10px;
+}
+
+.university-info h3 {
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.university-info p {
+    color: #777;
+    font-size: 14px;
+    margin: 5px 0 0;
+}
+
+/* Media queries to ensure responsiveness */
+@media (max-width: 1200px) {
+    .university-card {
+        width: 30%; /* Adjusted to fit 3 in a row */
+    }
+}
+
+@media (max-width: 992px) {
+    .university-card {
+        width: 45%; /* Adjusted to fit 2 in a row */
+    }
+}
+
+@media (max-width: 768px) {
+    .university-card {
+        width: 100%; /* Adjusted to fit 1 in a row */
+    }
+}

@@ -1,0 +1,102 @@
+/* src/pages/Result.css */
+.result-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+.result-header {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.result-header h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.result-header p {
+    font-size: 18px;
+    color: #555;
+}
+
+.result-details {
+    width: 100%;
+}
+
+.result-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.result-table th, .result-table td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.result-table th {
+    background-color: #f9f9f9;
+    font-weight: bold;
+}
+
+.progress-bar {
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    display: block;
+    height: 100%;
+    background-color: #007BFF;
+    text-align: right;
+    padding-right: 5px;
+    color: #FFFFFF;
+    font-weight: bold;
+    line-height: 25px;
+    height: 25px;
+}
+
+.error-message {
+    color: red;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.loading-message {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.category-descriptions {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.category-card {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.category-card h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.category-card p {
+    font-size: 16px;
+    line-height: 1.6;
+}
