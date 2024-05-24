@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Home.css'; // Подключаем CSS файл
 import heroImage from '../assets/hero.svg';
-import AboutImage from '../assets/Humaaans - 3 Characters.png';
-import ctaImage from '../assets/Humaaans - Friend Meeting.png';
+import AboutImage from '../assets/about.svg';
+import ctaImage from '../assets/test.svg';
 import {Link} from "react-router-dom";
 
 const Home = () => {

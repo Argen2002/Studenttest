@@ -58,10 +58,61 @@
     background-color: #007BFF;
     text-align: right;
     padding-right: 5px;
-    color: #FFFFFF;
+    color: #ffffff;
     font-weight: bold;
     line-height: 25px;
     height: 25px;
+}
+
+.category-description, .result-professions, .subject-selection {
+    margin-top: 20px;
+}
+
+.category-description h3, .result-professions h3, .subject-selection h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.result-professions ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.result-professions ul li {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.subject-selection select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 100%;
+    max-width: 400px;
+}
+
+.subject-test-link {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.subject-test-link p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.subject-test-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.subject-test-link a:hover {
+    text-decoration: underline;
 }
 
 .error-message {
@@ -75,28 +126,3 @@
     margin-top: 20px;
 }
 
-.category-descriptions {
-    margin-top: 20px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-}
-
-.category-card {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: left;
-}
-
-.category-card h3 {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.category-card p {
-    font-size: 16px;
-    line-height: 1.6;
-}

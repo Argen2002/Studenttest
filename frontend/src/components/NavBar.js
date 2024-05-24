@@ -13,7 +13,7 @@ const NavBar = () => {
                     <span className="dropdown-title">Тесты</span>
                     <div className="dropdown-content">
                         <Link to="/questionnaire">Тесты</Link>
-                        <Link to="/">Тесты профессии</Link>
+                        <Link to="/subject-test">Тесты профессии</Link>
                         <Link to="/result">Результаты</Link>
                     </div>
                 </li>

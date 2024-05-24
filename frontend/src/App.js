@@ -7,6 +7,7 @@ import Home from './pages/Home';
 
 import Questionnaire from './components/Questionnaire';
 import Result from './pages/Result';
+import SubjectTest from './pages/SubjectTest';
 
 import Register from './pages/Register';
 import Login from './pages/Login';
@@ -56,6 +57,7 @@ const App = () => {
                         <Route path="/universities/:id" element={<UniversityDetail />} />
                         <Route path="/about" element={<About />} />
                         <Route path="/contacts" element={<Contacts/>} />
+                        <Route path="/subject-test/:subject" element={<SubjectTest />} />
                     </Routes>
                 </div>
                 <Footer />
