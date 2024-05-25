@@ -3,7 +3,7 @@ from rest_framework import generics
 from .models import Category, Question, Answer, UserAnswer, University, Profession, Subject, SubjectQuestion, SubjectAnswer, UserSubjectAnswer
 from .serializers import CategorySerializer, QuestionSerializer, AnswerSerializer, UserAnswerSerializer, \
     UniversitySerializer, ProfessionSerializer, SubjectSerializer, SubjectQuestionSerializer, SubjectAnswerSerializer, \
-    UserSubjectAnswerSerializer, UserSubjectAnswerListSerializer
+    UserSubjectAnswerSerializer, UserSubjectAnswerListSerializer, UserProfileSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -57,19 +57,19 @@ class TestResultView(APIView):
 
         total_answers = len(user_answers)
         result = {category: round((count / total_answers) * 100, 2) for category, count in category_count.items()}
+
+        top_category = max(result, key=result.get)
+        recommended_universities = University.objects.filter(categories__name=top_category)
+
+        university_serializer = UniversitySerializer(recommended_universities, many=True)
+
         result_with_descriptions = {
             "results": result,
             "descriptions": category_descriptions,
             "professions": professions,
-            "subjects": subjects
+            "subjects": subjects,
+            "universities": university_serializer.data
         }
-
-        # Добавляем рекомендованные университеты
-        top_category = max(result, key=result.get)
-        recommended_professions = professions[top_category]
-        recommended_universities = University.objects.filter(professions__name__in=recommended_professions).distinct()
-
-        result_with_descriptions['recommended_universities'] = UniversitySerializer(recommended_universities, many=True).data
 
         return Response(result_with_descriptions)
 
@@ -93,6 +93,7 @@ class UniversityDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = University.objects.all()
     serializer_class = UniversitySerializer
     permission_classes = [AllowAny]
+
 
 class ProfessionListView(generics.ListCreateAPIView):
     queryset = Profession.objects.all()
@@ -144,3 +145,12 @@ class SubjectTestResultView(APIView):
             subject_points[subject_name] += answer.points
 
         return Response({"subject_points": subject_points})
+
+
+class UserProfileView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        user = request.user
+        serializer = UserProfileSerializer(user)
+        return Response(serializer.data)

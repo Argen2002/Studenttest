@@ -1,0 +1,29 @@
+.user-profile-container {
+    padding: 20px;
+}
+
+.profile-section {
+    margin-bottom: 20px;
+}
+
+h3 {
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+.error-message {
+    color: red;
+}
+
+.loading-message {
+    font-size: 18px;
+    font-weight: bold;
+}

@@ -1,6 +1,8 @@
 # tests/urls.py
 from django.urls import path
-from .views import CategoryListView, QuestionListView, AnswerListView, UserAnswerListView, TestResultView, UniversityListView, UniversityDetailView, ProfessionListView, SubjectListView, SubjectQuestionListView, SubjectAnswerListView, UserSubjectAnswerListView, SubjectTestResultView
+from .views import CategoryListView, QuestionListView, AnswerListView, UserAnswerListView, TestResultView, \
+    UniversityListView, UniversityDetailView, ProfessionListView, SubjectListView, SubjectQuestionListView, \
+    SubjectAnswerListView, UserSubjectAnswerListView, SubjectTestResultView, UserProfileView
 
 urlpatterns = [
     path('categories/', CategoryListView.as_view(), name='category-list'),
@@ -21,4 +23,6 @@ urlpatterns = [
     path('subject-answers/', SubjectAnswerListView.as_view(), name='subject-answer-list'),
     path('user-subject-answers/', UserSubjectAnswerListView.as_view(), name='user-subject-answer-list'),
     path('subject-test-result/', SubjectTestResultView.as_view(), name='subject-test-result'),
+
+    path('profile/', UserProfileView.as_view(), name='user-profile'),
 ]

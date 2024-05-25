@@ -23,7 +23,7 @@ const NavBar = () => {
             </ul>
 
             <div className="navbar-account">
-                <span>Личный кабинет</span>
+                <Link to="/profile">Личный кабинет</Link>
                 <button className="navbar-login-button"><Link to="/login">Войти</Link></button>
             </div>
         </nav>

@@ -1,4 +1,5 @@
 // src/pages/Result.js
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -35,6 +36,7 @@ const Result = () => {
         .catch(error => {
             console.error(error);
         });
+
 
     }, [token]);
 
@@ -122,25 +124,26 @@ const Result = () => {
                     <Link to={`/subject-test/${selectedSubject}`}>Пройти тест на предмет</Link>
                 </div>
             )}
-            {result.recommended_universities && (
-                <div className="recommended-universities">
-                    <h3>Рекомендуемые ВУЗы:</h3>
-                    <ul>
-                        {result.recommended_universities.map(university => (
-                            <li key={university.id}>
-                                <h4>{university.name}</h4>
-                                <p>{university.description}</p>
-                                <p>Рейтинг: {university.rating}</p>
-                                <p>Адрес: {university.address}</p>
-                                <p>Язык обучения: {university.language_of_instruction}</p>
-                                <p>Контактный телефон: {university.contact_number}</p>
-                                <p>Электронная почта: {university.email}</p>
-                                <a href={university.website} target="_blank" rel="noopener noreferrer">Веб-сайт</a>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
+            <div className="recommended-universities">
+                <h3>Рекомендуемые ВУЗы для категории: {topCategory}</h3>
+                <ul>
+                    {result.universities.map(university => (
+                        <div className="universities-section">
+                            <div className="universities-grid">
+                                <div key={university.id} className="university-card">
+                                    <Link to={`/universities/${university.id}`}>
+                                        <img src={university.image} alt={university.name} className="university-image" />
+                                        <div className="university-info">
+                                            <h3>{university.name}</h3>
+                                            <p>{university.address}</p>
+                                        </div>
+                                    </Link>
+                                </div>
+                            </div>
+                         </div>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 };

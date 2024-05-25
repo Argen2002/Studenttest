@@ -20,6 +20,8 @@ import UniversityDetail from './pages/UniversityDetail';
 import About from './pages/About';
 import Contacts from './pages/Contacts';
 
+import Profile from './pages/Profile';
+
 import axios from 'axios';
 import './App.css';
 
@@ -58,6 +60,8 @@ const App = () => {
                         <Route path="/about" element={<About />} />
                         <Route path="/contacts" element={<Contacts/>} />
                         <Route path="/subject-test/:subject" element={<SubjectTest />} />
+                        <Route path="/profile" element={<Profile/>} />
+
                     </Routes>
                 </div>
                 <Footer />

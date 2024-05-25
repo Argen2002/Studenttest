@@ -9,6 +9,10 @@ import contactIcon from '../assets/contact.png';
 import ratingIcon from '../assets/rating.png';
 import emailIcon from '../assets/iemail.png';
 import websiteIcon from '../assets/web.png';
+import contractIcon from '../assets/contract.png';
+import scholarshipIcon from '../assets/scholarship.png';
+import budgetIcon from '../assets/budget.png';
+import thresholdIcon from '../assets/checked-checkbox.png';
 
 const UniversityDetail = () => {
     const { id } = useParams();
@@ -28,7 +32,7 @@ const UniversityDetail = () => {
         return <div>Loading...</div>;
     }
 
-     return (
+    return (
         <div className="university-detail">
             <h2>{university.name}</h2>
             <div className="university-content">
@@ -78,6 +82,41 @@ const UniversityDetail = () => {
                         <p><a href={university.website} target="_blank" rel="noopener noreferrer">{university.website}</a></p>
                     </div>
                 </div>
+                <div className="university-info-item">
+                    <img src={contractIcon} alt="Contract" className="icon" />
+                    <div>
+                        <strong>Контракт</strong>
+                        <p>{university.contract} сом</p>
+                    </div>
+                </div>
+                <div className="university-info-item">
+                    <img src={scholarshipIcon} alt="Scholarship" className="icon" />
+                    <div>
+                        <strong>Стипендия</strong>
+                        <p>{university.scholarship} орт</p>
+                    </div>
+                </div>
+                <div className="university-info-item">
+                    <img src={budgetIcon} alt="Budget" className="icon" />
+                    <div>
+                        <strong>Бюджет</strong>
+                        <p>{university.budget ? 'Присутствует' : 'Отсутствует'}</p>
+                    </div>
+                </div>
+                <div className="university-info-item">
+                    <img src={thresholdIcon} alt="Threshold" className="icon" />
+                    <div>
+                        <strong>Пороговый ОРТ</strong>
+                        <p>{university.threshold_ort}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div className="university-content">
+                <h2 className="university-mission-h2">Миссия и цели</h2>
+            </div>
+            <div className="university-content">
+                <p className="university-mission">{university.mission_and_goals}</p>
             </div>
         </div>
     );
