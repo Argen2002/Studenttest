@@ -1,13 +1,22 @@
-// src/components/NavBar.js
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './NavBar.css'; // Подключаем CSS файл
+import './NavBar.css';
+import personalAccountIcon from '../assets/account.png';
+import burgerIcon from '../assets/menu.png';
 
 const NavBar = () => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleMenu = () => {
+        setIsOpen(!isOpen);
+    };
+
     return (
         <nav className="navbar">
-            <Link to="/" className="navbar-logo">LOGO</Link>
-            <ul className="navbar-links">
+            <Link to="/" className="navbar-logo">
+                <img src="/Argo.png" alt="Logo" className="logo" />
+            </Link>
+            <ul className={`navbar-links ${isOpen ? 'open' : ''}`}>
                 <li><Link to="/">Главная</Link></li>
                 <li className="dropdown">
                     <span className="dropdown-title">Тесты</span>
@@ -23,9 +32,14 @@ const NavBar = () => {
             </ul>
 
             <div className="navbar-account">
-                <Link to="/profile">Личный кабинет</Link>
+                <Link to="/profile">
+                    <img src={personalAccountIcon} alt="Personal Account" className="icon" />
+                </Link>
                 <button className="navbar-login-button"><Link to="/login">Войти</Link></button>
             </div>
+            <button className="burger-menu" onClick={toggleMenu}>
+                <img src={burgerIcon} alt="Menu" className="burger-icon" />
+            </button>
         </nav>
     );
 };

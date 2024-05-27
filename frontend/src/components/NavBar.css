@@ -1,8 +1,7 @@
-/* src/components/NavBar.css */
 .navbar {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
     padding: 10px 20px;
     background-color: white;
     border-bottom: 1px solid #ccc;
@@ -13,6 +12,7 @@
     font-weight: bold;
     text-decoration: none;
     color: black;
+    margin-left: 50px; /* Смещение логотипа */
 }
 
 .navbar-links {
@@ -25,6 +25,7 @@
 .navbar-links li {
     margin: 0 15px;
     position: relative;
+    line-height: 4.0;
 }
 
 .navbar-links a {
@@ -77,6 +78,7 @@
 .navbar-account {
     display: flex;
     align-items: center;
+    margin-right: 50px; /* Смещение аккаунта */
 }
 
 .navbar-login-button {
@@ -94,9 +96,76 @@
 .navbar-login-button a {
     color: white;
     text-decoration: none;
-
 }
 
 .navbar-login-button:hover {
     background-color: #0056b3;
+}
+
+.icon {
+    width: 34px;
+    height: 34px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.logo {
+    height: 55px;
+    width: auto;
+}
+
+.burger-menu {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.burger-icon {
+    width: 30px;
+    height: 30px;
+}
+
+@media (max-width: 768px) {
+    .navbar-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background-color: white;
+        padding: 20px;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar-links.open {
+        display: flex;
+    }
+
+    .burger-menu {
+        display: block;
+        margin-right: 20px; /* Смещение для кнопки бургера */
+    }
+
+    .navbar-account {
+        margin-right: 0;
+    }
+
+    .navbar-logo {
+        margin-left: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .logo {
+        width: 20px;
+        height: 20px;
+    }
 }
