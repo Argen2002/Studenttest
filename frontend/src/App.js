@@ -16,6 +16,8 @@ import Footer from './components/Footer';
 
 import UniversityList from './pages/UniversityList';
 import UniversityDetail from './pages/UniversityDetail';
+import CreateUniversity from './components/CreateUniversity';
+import EditUniversity from './components/EditUniversity';
 
 import About from './pages/About';
 import Contacts from './pages/Contacts';
@@ -54,14 +56,19 @@ const App = () => {
                             localStorage.setItem('token', token);
                         }} />} />
                         <Route path="/questionnaire" element={<Questionnaire />} />
+                        <Route path="/subject-test/:subject" element={<SubjectTest />} />
+
                         <Route path="/result" element={<Result />} />
+
                         <Route path="/universities" element={<UniversityList />} />
                         <Route path="/universities/:id" element={<UniversityDetail />} />
+                        <Route path="/universities/create" element={<CreateUniversity />} />
+                        <Route path="/universities/edit/:id" element={<EditUniversity />} />
+
                         <Route path="/about" element={<About />} />
                         <Route path="/contacts" element={<Contacts/>} />
-                        <Route path="/subject-test/:subject" element={<SubjectTest />} />
-                        <Route path="/profile" element={<Profile/>} />
 
+                        <Route path="/profile" element={<Profile/>} />
                     </Routes>
                 </div>
                 <Footer />

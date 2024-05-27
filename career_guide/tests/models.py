@@ -90,6 +90,11 @@ class UserSubjectAnswer(models.Model):
 
 
 class University(models.Model):
+    BUDGET_CHOICES = [
+        ('Присутствует', 'Присутствует'),
+        ('Отсутствует', 'Отсутствует'),
+    ]
+
     name = models.CharField(max_length=255, verbose_name='Название')
     description = models.TextField(blank=True, null=True, verbose_name='Описание')
     rating = models.CharField(max_length=255, verbose_name='Рейтинг')
@@ -101,13 +106,12 @@ class University(models.Model):
     image = models.ImageField(upload_to='universities/', null=True, blank=True)
     professions = models.ManyToManyField(Profession, related_name='universities', verbose_name='Профессий')
     categories = models.ManyToManyField(Category, related_name='universities', verbose_name='Категории')
-
     contract = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Контракт')
     scholarship = models.CharField(max_length=255, verbose_name='Стипендия')
-    budget = models.BooleanField(default=False, verbose_name='Бюджет')
+    budget = models.CharField(max_length=255, choices=BUDGET_CHOICES, verbose_name='Бюджет')
     mission_and_goals = models.TextField(blank=True, null=True, verbose_name='Миссия и цели')
     threshold_ort = models.CharField(max_length=255, verbose_name='Пароговый балл орт')
-
+    added_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='added_universities')
 
     def __str__(self):
         return self.name

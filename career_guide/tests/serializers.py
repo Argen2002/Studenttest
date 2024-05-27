@@ -44,19 +44,31 @@ class UserAnswerListSerializer(serializers.ListSerializer):
         return UserAnswer.objects.bulk_create(answers)
 
 
-class UniversitySerializer(serializers.ModelSerializer):
-    categories = serializers.StringRelatedField(many=True)
-    professions = serializers.StringRelatedField(many=True)
+class ProfessionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profession
+        fields = '__all__'
+
+
+class UniversityCreateSerializer(serializers.ModelSerializer):
+    categories = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), many=True)
+    professions = serializers.PrimaryKeyRelatedField(queryset=Profession.objects.all(), many=True)
+    added_by = serializers.ReadOnlyField(source='added_by.username')
 
     class Meta:
         model = University
         fields = '__all__'
 
 
-class ProfessionSerializer(serializers.ModelSerializer):
+class UniversitySerializer(serializers.ModelSerializer):
+    categories = CategorySerializer(many=True)
+    professions = ProfessionSerializer(many=True)
+    added_by = serializers.ReadOnlyField(source='added_by.username')
+
     class Meta:
-        model = Profession
+        model = University
         fields = '__all__'
+
 
 class SubjectSerializer(serializers.ModelSerializer):
     class Meta:
@@ -69,12 +81,14 @@ class SubjectAnswerSerializer(serializers.ModelSerializer):
         model = SubjectAnswer
         fields = '__all__'
 
+
 class SubjectQuestionSerializer(serializers.ModelSerializer):
     answers = SubjectAnswerSerializer(many=True, read_only=True)
 
     class Meta:
         model = SubjectQuestion
         fields = '__all__'
+
 
 class UserSubjectAnswerSerializer(serializers.ModelSerializer):
     class Meta:
@@ -86,6 +100,7 @@ class UserSubjectAnswerSerializer(serializers.ModelSerializer):
         validated_data['user'] = user
         validated_data['points'] = validated_data['answer'].points if validated_data['answer'].correct else 0
         return super().create(validated_data)
+
 
 class UserSubjectAnswerListSerializer(serializers.ListSerializer):
     child = UserSubjectAnswerSerializer()

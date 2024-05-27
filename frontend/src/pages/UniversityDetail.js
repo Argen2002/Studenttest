@@ -1,6 +1,5 @@
-// src/components/UniversityDetail.js
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import './UniversityDetail.css';
 import addressIcon from '../assets/address.png';
@@ -16,7 +15,9 @@ import thresholdIcon from '../assets/checked-checkbox.png';
 
 const UniversityDetail = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [university, setUniversity] = useState(null);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         axios.get(`http://127.0.0.1:8000/api/universities/${id}/`)
@@ -25,8 +26,24 @@ const UniversityDetail = () => {
             })
             .catch(error => {
                 console.error('There was an error fetching the university!', error);
+                setError('Ошибка при загрузке данных.');
             });
     }, [id]);
+
+    const handleDelete = () => {
+        const confirmDelete = window.confirm("Вы точно хотите удалить?");
+        if (confirmDelete) {
+            axios.delete(`http://127.0.0.1:8000/api/universities/${id}/`)
+                .then(response => {
+                    console.log('University deleted successfully:', response.data);
+                    navigate('/universities');
+                })
+                .catch(error => {
+                    console.error('There was an error deleting the university!', error);
+                    setError('Ошибка при удалении ВУЗа.');
+                });
+        }
+    };
 
     if (!university) {
         return <div>Loading...</div>;
@@ -100,7 +117,7 @@ const UniversityDetail = () => {
                     <img src={budgetIcon} alt="Budget" className="icon" />
                     <div>
                         <strong>Бюджет</strong>
-                        <p>{university.budget ? 'Присутствует' : 'Отсутствует'}</p>
+                        <p>{university.budget}</p>
                     </div>
                 </div>
                 <div className="university-info-item">
@@ -118,6 +135,12 @@ const UniversityDetail = () => {
             <div className="university-content">
                 <p className="university-mission">{university.mission_and_goals}</p>
             </div>
+
+            <div className="university-actions">
+                <button className="btn btn-primary" onClick={() => navigate(`/universities/edit/${id}`)}>Редактировать</button>
+                <button className="btn btn-danger" onClick={handleDelete}>Удалить</button>
+            </div>
+            {error && <div className="error-message">{error}</div>}
         </div>
     );
 };

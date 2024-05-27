@@ -5,6 +5,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 User = get_user_model()
 
+
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User

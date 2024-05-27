@@ -3,23 +3,27 @@ from rest_framework import generics
 from .models import Category, Question, Answer, UserAnswer, University, Profession, Subject, SubjectQuestion, SubjectAnswer, UserSubjectAnswer
 from .serializers import CategorySerializer, QuestionSerializer, AnswerSerializer, UserAnswerSerializer, \
     UniversitySerializer, ProfessionSerializer, SubjectSerializer, SubjectQuestionSerializer, SubjectAnswerSerializer, \
-    UserSubjectAnswerSerializer, UserSubjectAnswerListSerializer, UserProfileSerializer
+    UserSubjectAnswerSerializer, UserSubjectAnswerListSerializer, UserProfileSerializer, UniversityCreateSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.db.models import Q
 
+
 class CategoryListView(generics.ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
 
 class QuestionListView(generics.ListCreateAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
 
+
 class AnswerListView(generics.ListCreateAPIView):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
+
 
 class UserAnswerListView(generics.CreateAPIView):
     queryset = UserAnswer.objects.all()
@@ -73,6 +77,7 @@ class TestResultView(APIView):
 
         return Response(result_with_descriptions)
 
+
 class UniversityListView(generics.ListCreateAPIView):
     queryset = University.objects.all()
     serializer_class = UniversitySerializer
@@ -89,19 +94,34 @@ class UniversityListView(generics.ListCreateAPIView):
             )
         return queryset
 
+
 class UniversityDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = University.objects.all()
-    serializer_class = UniversitySerializer
-    permission_classes = [AllowAny]
+    serializer_class = UniversityCreateSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_update(self, serializer):
+        serializer.save(added_by=self.request.user)
+
+
+class CreateUniversityView(generics.CreateAPIView):
+    queryset = University.objects.all()
+    serializer_class = UniversityCreateSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(added_by=self.request.user)
 
 
 class ProfessionListView(generics.ListCreateAPIView):
     queryset = Profession.objects.all()
     serializer_class = ProfessionSerializer
 
+
 class SubjectListView(generics.ListCreateAPIView):
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
+
 
 class SubjectQuestionListView(generics.ListAPIView):
     serializer_class = SubjectQuestionSerializer

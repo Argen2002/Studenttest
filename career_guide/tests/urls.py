@@ -2,7 +2,7 @@
 from django.urls import path
 from .views import CategoryListView, QuestionListView, AnswerListView, UserAnswerListView, TestResultView, \
     UniversityListView, UniversityDetailView, ProfessionListView, SubjectListView, SubjectQuestionListView, \
-    SubjectAnswerListView, UserSubjectAnswerListView, SubjectTestResultView, UserProfileView
+    SubjectAnswerListView, UserSubjectAnswerListView, SubjectTestResultView, UserProfileView, CreateUniversityView
 
 urlpatterns = [
     path('categories/', CategoryListView.as_view(), name='category-list'),
@@ -15,6 +15,8 @@ urlpatterns = [
 
     path('universities/', UniversityListView.as_view(), name='university-list'),
     path('universities/<int:pk>/', UniversityDetailView.as_view(), name='university-detail'),
+    path('universities/create/', CreateUniversityView.as_view(), name='create-university'),
+    path('universities/edit/<int:pk>/', UniversityDetailView.as_view(), name='edit-university'),
 
     path('professions/', ProfessionListView.as_view(), name='profession-list'),
 

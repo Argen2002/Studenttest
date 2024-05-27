@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './CreateUniversity.css';
+import './EditUniversity.css';
 
-const CreateUniversity = () => {
+const EditUniversity = () => {
+    const { id } = useParams();
+    const navigate = useNavigate();
+
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [rating, setRating] = useState('');
@@ -24,6 +28,29 @@ const CreateUniversity = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        axios.get(`http://127.0.0.1:8000/api/universities/${id}/`)
+            .then(response => {
+                const university = response.data;
+                setName(university.name);
+                setDescription(university.description);
+                setRating(university.rating);
+                setAddress(university.address);
+                setLanguageOfInstruction(university.language_of_instruction);
+                setEmail(university.email);
+                setContactNumber(university.contact_number);
+                setWebsite(university.website);
+                setContract(university.contract);
+                setScholarship(university.scholarship);
+                setBudget(university.budget);
+                setMissionAndGoals(university.mission_and_goals);
+                setThresholdOrt(university.threshold_ort);
+                setSelectedCategories(university.categories.map(category => category.id));
+                setSelectedProfessions(university.professions.map(profession => profession.id));
+            })
+            .catch(error => {
+                console.error('There was an error fetching the university!', error);
+            });
+
         axios.get('http://127.0.0.1:8000/api/categories/')
             .then(response => {
                 setCategories(response.data);
@@ -39,7 +66,7 @@ const CreateUniversity = () => {
             .catch(error => {
                 console.error('There was an error fetching the professions!', error);
             });
-    }, []);
+    }, [id]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -68,16 +95,17 @@ const CreateUniversity = () => {
             formData.append('professions', profession);
         });
 
-        axios.post('http://127.0.0.1:8000/api/universities/create/', formData, {
+        axios.put(`http://127.0.0.1:8000/api/universities/${id}/`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         })
         .then(response => {
-            console.log('University created successfully:', response.data);
+            console.log('University updated successfully:', response.data);
+            navigate(`/universities/${id}`);
         })
         .catch(error => {
-            console.error('There was an error creating the university!', error);
+            console.error('There was an error updating the university!', error);
             setError(error.response.data);
         });
     };
@@ -97,8 +125,8 @@ const CreateUniversity = () => {
     };
 
     return (
-        <div className="create-university-container">
-            <h2>Добавить ВУЗ</h2>
+        <div className="edit-university-container">
+            <h2>Редактировать ВУЗ</h2>
             <form onSubmit={handleSubmit} encType="multipart/form-data">
                 <div className="form-group">
                     <label>Название</label>
@@ -258,14 +286,11 @@ const CreateUniversity = () => {
                         ))}
                     </select>
                 </div>
-                <div>
-                    <p>Удерживайте клавишу "Control" или "Command" на Mac, чтобы выбрать несколько.</p>
-                </div>
                 {error && <div className="error-message">Ошибка: {JSON.stringify(error)}</div>}
-                <button type="submit" className="btn btn-primary">Добавить ВУЗ</button>
+                <button type="submit" className="btn btn-primary">Сохранить изменения</button>
             </form>
         </div>
     );
 };
 
-export default CreateUniversity;
+export default EditUniversity;
