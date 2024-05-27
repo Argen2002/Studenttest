@@ -1,5 +1,3 @@
-// src/pages/Result.js
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -11,6 +9,7 @@ const Result = () => {
     const [selectedSubject, setSelectedSubject] = useState('');
     const [subjectPoints, setSubjectPoints] = useState({});
     const token = localStorage.getItem('token');
+    const [universities, setUniversities] = useState([]);
 
     useEffect(() => {
         axios.get('http://127.0.0.1:8000/api/test-result/', {
@@ -36,6 +35,14 @@ const Result = () => {
         .catch(error => {
             console.error(error);
         });
+
+        axios.get('http://127.0.0.1:8000/api/universities/')
+            .then(response => {
+                setUniversities(response.data.slice(0, 4)); // Get only the first 4 universities
+            })
+            .catch(error => {
+                console.error('There was an error fetching the universities!', error);
+            });
 
 
     }, [token]);
@@ -126,23 +133,19 @@ const Result = () => {
             )}
             <div className="recommended-universities">
                 <h3>Рекомендуемые ВУЗы для категории: {topCategory}</h3>
-                <ul>
-                    {result.universities.map(university => (
-                        <div className="universities-section">
-                            <div className="universities-grid">
-                                <div key={university.id} className="university-card">
-                                    <Link to={`/universities/${university.id}`}>
-                                        <img src={university.image} alt={university.name} className="university-image" />
-                                        <div className="university-info">
-                                            <h3>{university.name}</h3>
-                                            <p>{university.address}</p>
-                                        </div>
-                                    </Link>
+                <div className="universities-grid">
+                    {universities.map(university => (
+                        <div key={university.id} className="university-card">
+                            <Link to={`/universities/${university.id}`}>
+                                <img src={university.image} alt={university.name} className="university-image" />
+                                <div className="university-info">
+                                    <h3>{university.name}</h3>
+                                    <p>{university.address}</p>
                                 </div>
-                            </div>
-                         </div>
+                            </Link>
+                        </div>
                     ))}
-                </ul>
+                </div>
             </div>
         </div>
     );
