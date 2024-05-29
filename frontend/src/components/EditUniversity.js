@@ -28,28 +28,32 @@ const EditUniversity = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        axios.get(`http://127.0.0.1:8000/api/universities/${id}/`)
-            .then(response => {
-                const university = response.data;
-                setName(university.name);
-                setDescription(university.description);
-                setRating(university.rating);
-                setAddress(university.address);
-                setLanguageOfInstruction(university.language_of_instruction);
-                setEmail(university.email);
-                setContactNumber(university.contact_number);
-                setWebsite(university.website);
-                setContract(university.contract);
-                setScholarship(university.scholarship);
-                setBudget(university.budget);
-                setMissionAndGoals(university.mission_and_goals);
-                setThresholdOrt(university.threshold_ort);
-                setSelectedCategories(university.categories.map(category => category.id));
-                setSelectedProfessions(university.professions.map(profession => profession.id));
-            })
-            .catch(error => {
-                console.error('There was an error fetching the university!', error);
-            });
+        axios.get(`http://127.0.0.1:8000/api/universities/${id}/`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+        .then(response => {
+            const university = response.data;
+            setName(university.name);
+            setDescription(university.description);
+            setRating(university.rating);
+            setAddress(university.address);
+            setLanguageOfInstruction(university.language_of_instruction);
+            setEmail(university.email);
+            setContactNumber(university.contact_number);
+            setWebsite(university.website);
+            setContract(university.contract);
+            setScholarship(university.scholarship);
+            setBudget(university.budget);
+            setMissionAndGoals(university.mission_and_goals);
+            setThresholdOrt(university.threshold_ort);
+            setSelectedCategories(university.categories.map(category => category.id));
+            setSelectedProfessions(university.professions.map(profession => profession.id));
+        })
+        .catch(error => {
+            console.error('There was an error fetching the university!', error);
+        });
 
         axios.get('http://127.0.0.1:8000/api/categories/')
             .then(response => {
@@ -97,7 +101,8 @@ const EditUniversity = () => {
 
         axios.put(`http://127.0.0.1:8000/api/universities/${id}/`, formData, {
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${localStorage.getItem('token')}`
             }
         })
         .then(response => {

@@ -1,4 +1,3 @@
-/* src/components/UniversityList.css */
 .university-list {
     text-align: center;
     padding: 20px;
@@ -54,6 +53,7 @@
     color: #777;
     font-size: 14px;
     margin: 5px 0 0;
+
 }
 
 /* Media queries to ensure responsiveness */

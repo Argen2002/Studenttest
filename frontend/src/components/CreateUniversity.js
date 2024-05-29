@@ -3,6 +3,7 @@ import axios from 'axios';
 import './CreateUniversity.css';
 
 const CreateUniversity = () => {
+    const [user, setUser] = useState(null);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [rating, setRating] = useState('');
@@ -24,6 +25,18 @@ const CreateUniversity = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        axios.get('http://127.0.0.1:8000/api/current-user/', {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+        .then(response => {
+            setUser(response.data);
+        })
+        .catch(error => {
+            console.error('There was an error fetching the user data!', error);
+        });
+
         axios.get('http://127.0.0.1:8000/api/categories/')
             .then(response => {
                 setCategories(response.data);
@@ -70,7 +83,8 @@ const CreateUniversity = () => {
 
         axios.post('http://127.0.0.1:8000/api/universities/create/', formData, {
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         })
         .then(response => {
@@ -95,6 +109,14 @@ const CreateUniversity = () => {
     const handleImageChange = (e) => {
         setImage(e.target.files[0]);
     };
+
+    if (!user) {
+        return <div>Loading...</div>;
+    }
+
+    if (!user.can_add_university) {
+        return <div>У вас нет прав для добавления ВУЗов.</div>;
+    }
 
     return (
         <div className="create-university-container">

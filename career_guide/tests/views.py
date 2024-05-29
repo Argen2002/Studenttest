@@ -3,11 +3,15 @@ from rest_framework import generics
 from .models import Category, Question, Answer, UserAnswer, University, Profession, Subject, SubjectQuestion, SubjectAnswer, UserSubjectAnswer
 from .serializers import CategorySerializer, QuestionSerializer, AnswerSerializer, UserAnswerSerializer, \
     UniversitySerializer, ProfessionSerializer, SubjectSerializer, SubjectQuestionSerializer, SubjectAnswerSerializer, \
-    UserSubjectAnswerSerializer, UserSubjectAnswerListSerializer, UserProfileSerializer, UniversityCreateSerializer
+    UserSubjectAnswerSerializer, UserProfileSerializer, UniversityCreateSerializer, UserSerializer
+from rest_framework.permissions import IsAuthenticated, AllowAny, BasePermission
+from django.db.models import Q
+from django.core.mail import EmailMessage
+from rest_framework import status
+from django.conf import settings
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, AllowAny
-from django.db.models import Q
+from .permissions import IsOwnerOrReadOnly
 
 
 class CategoryListView(generics.ListCreateAPIView):
@@ -98,22 +102,32 @@ class UniversityListView(generics.ListCreateAPIView):
 class UniversityDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = University.objects.all()
     serializer_class = UniversityCreateSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
 
     def perform_update(self, serializer):
         serializer.save(added_by=self.request.user)
 
 
+class CanAddUniversityPermission(BasePermission):
+    def has_permission(self, request, view):
+        return request.user and request.user.is_authenticated and request.user.can_add_university
+
+
 class CreateUniversityView(generics.CreateAPIView):
     queryset = University.objects.all()
     serializer_class = UniversityCreateSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, CanAddUniversityPermission]
 
     def perform_create(self, serializer):
         serializer.save(added_by=self.request.user)
 
 
 class ProfessionListView(generics.ListCreateAPIView):
+    queryset = Profession.objects.all()
+    serializer_class = ProfessionSerializer
+
+
+class ProfessionDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Profession.objects.all()
     serializer_class = ProfessionSerializer
 
@@ -173,4 +187,45 @@ class UserProfileView(APIView):
     def get(self, request, *args, **kwargs):
         user = request.user
         serializer = UserProfileSerializer(user)
+        return Response(serializer.data)
+
+class ContactFormView(APIView):
+    def post(self, request, *args, **kwargs):
+        name = request.data.get('name')
+        email = request.data.get('email')
+        message = request.data.get('message')
+        files = request.FILES.getlist('files')
+
+        email_subject = f"Message from {name}"
+        email_body = f"Имя: {name}\nEmail: {email}\n\n{message}"
+
+        email_message = EmailMessage(
+            subject=email_subject,
+            body=email_body,
+            from_email=f"{name} <{settings.EMAIL_HOST_USER}>",
+            to=[settings.EMAIL_HOST_USER],
+            reply_to=[email]
+        )
+
+        for file in files:
+            email_message.attach(file.name, file.read(), file.content_type)
+
+        email_message.send()
+
+        return Response({"message": "Email sent successfully"}, status=status.HTTP_200_OK)
+
+
+class CurrentUserView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data)
+
+
+class UserDetailView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        serializer = UserSerializer(request.user)
         return Response(serializer.data)

@@ -159,3 +159,28 @@ SIMPLE_JWT = {
     'JTI_CLAIM': 'jti',
 }
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'olim.olim.1994@mail.ru'
+EMAIL_HOST_PASSWORD = 'RQjnC08Ayw9HSbXgFZ9L'
+
+
+# Максимальный размер файла 5 MB
+DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
+
+# Логирование для отладки
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+}

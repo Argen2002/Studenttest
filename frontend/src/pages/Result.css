@@ -1,4 +1,3 @@
-/* src/pages/Result.css */
 .result-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -139,12 +138,13 @@
 
 .universities-grid {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
+    gap: 20px; /* Добавляем отступы между карточками */
 }
 
 .university-card {
-    width: 200px;
+    width: calc(25% - 20px); /* Обеспечиваем 4 карточки в строке с учетом отступов */
     border: 1px solid #ccc;
     border-radius: 10px;
     padding: 10px;
@@ -190,5 +190,3 @@
 .universities-header a:hover {
     text-decoration: underline;
 }
-
-

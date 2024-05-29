@@ -25,7 +25,6 @@
 .navbar-links li {
     margin: 0 15px;
     position: relative;
-    line-height: 4.0;
 }
 
 .navbar-links a {
@@ -144,6 +143,10 @@
         display: flex;
     }
 
+    .navbar-links li {
+        margin: 20px 0; /* Добавьте отступы между ссылками */
+    }
+
     .burger-menu {
         display: block;
         margin-right: 20px; /* Смещение для кнопки бургера */
@@ -160,12 +163,12 @@
 
 @media (max-width: 480px) {
     .icon {
-        width: 20px;
-        height: 20px;
+        width: 35px;
+        height: 35px;
     }
 
     .logo {
-        width: 20px;
-        height: 20px;
+        width: 40px;
+        height: 40px;
     }
 }

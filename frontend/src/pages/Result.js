@@ -8,10 +8,23 @@ const Result = () => {
     const [error, setError] = useState(null);
     const [selectedSubject, setSelectedSubject] = useState('');
     const [subjectPoints, setSubjectPoints] = useState({});
+    const [username, setUsername] = useState('');
     const token = localStorage.getItem('token');
     const [universities, setUniversities] = useState([]);
 
     useEffect(() => {
+        axios.get('http://127.0.0.1:8000/api/user/', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(response => {
+            setUsername(response.data.username);
+        })
+        .catch(error => {
+            console.error('There was an error fetching the user!', error);
+        });
+
         axios.get('http://127.0.0.1:8000/api/test-result/', {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -38,12 +51,11 @@ const Result = () => {
 
         axios.get('http://127.0.0.1:8000/api/universities/')
             .then(response => {
-                setUniversities(response.data.slice(0, 4)); // Get only the first 4 universities
+                setUniversities(response.data); // Get only the first 4 universities
             })
             .catch(error => {
                 console.error('There was an error fetching the universities!', error);
             });
-
 
     }, [token]);
 
@@ -65,6 +77,7 @@ const Result = () => {
     return (
         <div className="result-container">
             <div className="result-header">
+                <h2>Добро пожаловать, {username}!</h2>
                 <h2>Ваши результаты теста</h2>
                 <p>Ваши результаты:</p>
             </div>

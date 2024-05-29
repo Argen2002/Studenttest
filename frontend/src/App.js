@@ -1,6 +1,7 @@
 // src/App.js
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { UserProvider } from './contexts/UserContext';
 
 import NavBar from './components/NavBar';
 import Home from './pages/Home';
@@ -23,6 +24,10 @@ import About from './pages/About';
 import Contacts from './pages/Contacts';
 
 import Profile from './pages/Profile';
+import ContactForm from './pages/ContactForm';
+
+import ProfessionList from './pages/ProfessionList';
+import ProfessionDetail from './pages/ProfessionDetail';
 
 import axios from 'axios';
 import './App.css';
@@ -69,6 +74,10 @@ const App = () => {
                         <Route path="/contacts" element={<Contacts/>} />
 
                         <Route path="/profile" element={<Profile/>} />
+                        <Route path="/contact" element={<ContactForm />} />
+
+                        <Route path="/professions" element={<ProfessionList/>} />
+                        <Route path="/professions/:id" element={<ProfessionDetail />} />
                     </Routes>
                 </div>
                 <Footer />

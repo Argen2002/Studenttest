@@ -45,6 +45,7 @@ class UserAnswerListSerializer(serializers.ListSerializer):
 
 
 class ProfessionSerializer(serializers.ModelSerializer):
+    category = serializers.StringRelatedField()
     class Meta:
         model = Profession
         fields = '__all__'
@@ -155,3 +156,9 @@ class UserProfileSerializer(serializers.ModelSerializer):
         personality_type = self.get_personality_type(obj)
         universities = University.objects.filter(categories__name=personality_type)
         return UniversitySerializer(universities, many=True).data
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email', 'can_add_university')

@@ -1,13 +1,28 @@
 .user-profile-container {
+    max-width: 900px;
+    margin: 0 auto;
     padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px;
+    margin-top: 50px;
+    text-align: left;
 }
 
-.profile-section {
+h2 {
+    font-size: 28px;
+    font-weight: bold;
     margin-bottom: 20px;
+    color: #333;
+    text-align: center;
 }
 
 h3 {
-    margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #555;
 }
 
 ul {
@@ -19,11 +34,108 @@ li {
     margin-bottom: 10px;
 }
 
+.profile-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.profile-section h3 {
+    margin-bottom: 20px;
+}
+
 .error-message {
     color: red;
+    text-align: center;
+    margin-top: 20px;
 }
 
 .loading-message {
     font-size: 18px;
     font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.profile-recommended-universities {
+    text-align: center;
+}
+
+.profile-universities-grid {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px; /* Добавляем отступы между карточками */
+
+}
+
+.profile-university-card {
+    width: calc(50% - 20px); /* Обеспечиваем 2 карточки в строке с учетом отступов */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+
+}
+
+.profile-university-card h3 {
+    margin-top: 0;
+    font-size: 18px;
+}
+
+.profile-university-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.profile-university-card p {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.modal-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.modal-body h5 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.modal-body p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.modal-body ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.modal-body li {
+    margin-bottom: 10px;
+}
+
+.button-link {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.button-link:hover {
+    background-color: #0056b3;
+    color: white;
 }

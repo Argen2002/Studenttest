@@ -43,6 +43,8 @@ class UserAnswer(models.Model):
 
 class Profession(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название профессий')
+    description = models.TextField(verbose_name='Описание', blank=True, null=True)
+    image = models.ImageField(upload_to='professions/', null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='professions', verbose_name='Категория')
 
     def __str__(self):
@@ -69,7 +71,7 @@ class SubjectAnswer(models.Model):
     question = models.ForeignKey(SubjectQuestion, on_delete=models.CASCADE, related_name='answers', verbose_name='Вопрос')
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='answers', verbose_name='Предмет')
     text = models.CharField(max_length=255, verbose_name='Ответ')
-    correct = models.BooleanField(default=False, verbose_name='Статус')
+    correct = models.BooleanField(default=False, verbose_name='Правильный')
     points = models.IntegerField(default=0, verbose_name='Баллы')
 
     def __str__(self):

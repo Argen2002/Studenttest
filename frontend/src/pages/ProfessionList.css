@@ -1,0 +1,52 @@
+.profession-list-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profession-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.profession-card {
+    flex: 1 1 calc(25% - 20px);
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+.profession-card:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.profession-card a {
+    text-decoration: none; /* Убираем подчеркивание */
+    color: inherit; /* Наследуем цвет текста */
+}
+
+.profession-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.profession-info {
+    padding: 15px;
+}
+
+.profession-info h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.profession-info p {
+    margin: 10px 0 0;
+    font-size: 14px;
+    color: #555;
+}

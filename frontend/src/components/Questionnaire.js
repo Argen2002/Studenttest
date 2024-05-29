@@ -1,8 +1,7 @@
-// src/pages/Questionnaire.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './Questionnaire.css'; // Import the CSS file
+import './Questionnaire.css';
 
 const Questionnaire = () => {
     const [questions, setQuestions] = useState([]);
