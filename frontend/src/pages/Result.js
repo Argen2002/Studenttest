@@ -47,8 +47,6 @@ const Result = () => {
         .catch(error => {
             console.error(error);
         });
-
-
     }, [token]);
 
     if (error) {
@@ -136,12 +134,15 @@ const Result = () => {
                     <Link to={`/subject-test/${selectedSubject}`}>Пройти тест на предмет</Link>
                 </div>
             )}
+            <br/>
             <div className="recommended-universities">
                 <h3>Рекомендуемые ВУЗы для категории: {topCategory}</h3>
                 <ul>
                     {result.universities.map(university => (
                         <li key={university.id}>
-                            <h4>{university.name}</h4>
+                            <Link to={`/universities/${university.id}`}>
+                                <h4>{university.name}</h4>
+                            </Link>
                             <p>{university.description}</p>
                             <p>Рейтинг: {university.rating}</p>
                             <p>Адрес: {university.address}</p>
