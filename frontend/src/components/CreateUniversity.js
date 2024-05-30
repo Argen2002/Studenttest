@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './CreateUniversity.css';
 
 const CreateUniversity = () => {
@@ -23,6 +24,7 @@ const CreateUniversity = () => {
     const [professions, setProfessions] = useState([]);
     const [selectedProfessions, setSelectedProfessions] = useState([]);
     const [error, setError] = useState(null);
+    const navigate = useNavigate(); // Добавляем useNavigate
 
     useEffect(() => {
         axios.get('http://127.0.0.1:8000/api/current-user/', {
@@ -89,6 +91,7 @@ const CreateUniversity = () => {
         })
         .then(response => {
             console.log('University created successfully:', response.data);
+            navigate('/universities'); // Перенаправляем пользователя на страницу /universities
         })
         .catch(error => {
             console.error('There was an error creating the university!', error);
