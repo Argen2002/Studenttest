@@ -2,8 +2,9 @@
 from rest_framework import generics
 from .models import Category, Question, Answer, UserAnswer, University, Profession, Subject, SubjectQuestion, SubjectAnswer, UserSubjectAnswer
 from .serializers import CategorySerializer, QuestionSerializer, AnswerSerializer, UserAnswerSerializer, \
-    UniversitySerializer, ProfessionSerializer, SubjectSerializer, SubjectQuestionSerializer, SubjectAnswerSerializer, \
-    UserSubjectAnswerSerializer, UserProfileSerializer, UniversityCreateSerializer, UserSerializer
+    ProfessionSerializer, SubjectSerializer, SubjectQuestionSerializer, SubjectAnswerSerializer, \
+    UserSubjectAnswerSerializer, UserProfileSerializer, UniversityCreateSerializer, UserSerializer, \
+    UniversityReadSerializer, UniversityWriteSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny, BasePermission
 from django.db.models import Q
 from django.core.mail import EmailMessage
@@ -69,7 +70,7 @@ class TestResultView(APIView):
         top_category = max(result, key=result.get)
         recommended_universities = University.objects.filter(categories__name=top_category)
 
-        university_serializer = UniversitySerializer(recommended_universities, many=True)
+        university_serializer = UniversityWriteSerializer(recommended_universities, many=True)
 
         result_with_descriptions = {
             "results": result,
@@ -84,7 +85,7 @@ class TestResultView(APIView):
 
 class UniversityListView(generics.ListCreateAPIView):
     queryset = University.objects.all()
-    serializer_class = UniversitySerializer
+    serializer_class = UniversityWriteSerializer
     permission_classes = [AllowAny]
 
     def get_queryset(self):
@@ -101,8 +102,12 @@ class UniversityListView(generics.ListCreateAPIView):
 
 class UniversityDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = University.objects.all()
-    serializer_class = UniversityCreateSerializer
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+
+    def get_serializer_class(self):
+        if self.request.method in ['GET']:
+            return UniversityReadSerializer
+        return UniversityWriteSerializer
 
     def perform_update(self, serializer):
         serializer.save(added_by=self.request.user)

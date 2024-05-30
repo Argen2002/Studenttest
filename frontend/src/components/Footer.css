@@ -47,3 +47,33 @@
 .social-icon:hover {
     color: #fff;
 }
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .footer-content {
+        padding: 0 20px;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .footer-social {
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-content {
+        padding: 0 10px;
+    }
+
+    .footer-links {
+        gap: 5px;
+    }
+
+    .social-icon {
+        font-size: 18px;
+    }
+}

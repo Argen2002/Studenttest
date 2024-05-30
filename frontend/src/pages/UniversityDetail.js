@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import './UniversityDetail.css';
 import addressIcon from '../assets/address.png';
@@ -18,6 +18,7 @@ const UniversityDetail = () => {
     const navigate = useNavigate();
     const [university, setUniversity] = useState(null);
     const [error, setError] = useState(null);
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         axios.get(`http://127.0.0.1:8000/api/universities/${id}/`)
@@ -28,6 +29,23 @@ const UniversityDetail = () => {
                 console.error('There was an error fetching the university!', error);
                 setError('Ошибка при загрузке данных.');
             });
+
+        const fetchUserInfo = async () => {
+            const token = localStorage.getItem('token');
+            try {
+                const response = await axios.get('http://127.0.0.1:8000/api/user/', {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                setUser(response.data);
+            } catch (error) {
+                console.error('There was an error fetching the user info!', error);
+                setUser(null);
+            }
+        };
+
+        fetchUserInfo();
     }, [id]);
 
     const handleDelete = () => {
@@ -110,7 +128,7 @@ const UniversityDetail = () => {
                     <img src={scholarshipIcon} alt="Scholarship" className="icon" />
                     <div>
                         <strong>Стипендия</strong>
-                        <p>{university.scholarship} орт</p>
+                        <p>{university.scholarship}</p>
                     </div>
                 </div>
                 <div className="university-info-item">
@@ -131,15 +149,26 @@ const UniversityDetail = () => {
 
             <div className="university-content">
                 <h2 className="university-mission-h2">Миссия и цели</h2>
-            </div>
-            <div className="university-content">
                 <p className="university-mission">{university.mission_and_goals}</p>
             </div>
 
-            <div className="university-actions">
-                <button className="btn btn-primary" onClick={() => navigate(`/universities/edit/${id}`)}>Редактировать</button>
-                <button className="btn btn-danger" onClick={handleDelete}>Удалить</button>
+            <div className="university-content">
+                <h2 className="university-professions-h2">Профессии</h2>
+                <ul className="university-professions-list">
+                    {university.professions && university.professions.map((profession, index) => (
+                        <li key={index}>
+                            <Link to={`/professions/${profession.id}`}>{profession.name}</Link>
+                        </li>
+                    ))}
+                </ul>
             </div>
+
+            {user && user.can_add_university && (
+                <div className="university-actions">
+                    <button className="btn btn-primary" onClick={() => navigate(`/universities/edit/${id}`)}>Редактировать</button>
+                    <button className="btn btn-danger" onClick={handleDelete}>Удалить</button>
+                </div>
+            )}
             {error && <div className="error-message">{error}</div>}
         </div>
     );

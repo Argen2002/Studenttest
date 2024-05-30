@@ -67,19 +67,17 @@ li {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 20px; /* Добавляем отступы между карточками */
-
+    gap: 20px; /* Add spacing between cards */
 }
 
 .profile-university-card {
-    width: calc(50% - 20px); /* Обеспечиваем 2 карточки в строке с учетом отступов */
+    width: calc(50% - 20px); /* Ensure 2 cards per row with spacing */
     border: 1px solid #ccc;
     border-radius: 10px;
     padding: 10px;
     text-align: center;
     background-color: #f9f9f9;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-
 }
 
 .profile-university-card h3 {
@@ -138,4 +136,81 @@ li {
 .button-link:hover {
     background-color: #0056b3;
     color: white;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .profile-universities-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-university-card {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    h3 {
+        font-size: 20px;
+    }
+
+    .profile-section {
+        padding: 15px;
+    }
+
+    .modal-title {
+        font-size: 20px;
+    }
+
+    .modal-body h5 {
+        font-size: 18px;
+    }
+
+    .modal-body p {
+        font-size: 14px;
+    }
+
+    .button-link {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .user-profile-container {
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+
+    .profile-section {
+        padding: 10px;
+    }
+
+    .modal-title {
+        font-size: 18px;
+    }
+
+    .modal-body h5 {
+        font-size: 16px;
+    }
+
+    .modal-body p {
+        font-size: 12px;
+    }
+
+    .button-link {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
 }

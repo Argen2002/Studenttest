@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Modal, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Profile.css';
-import { Link } from 'react-router-dom';
 
 const UserProfile = () => {
     const [profile, setProfile] = useState(null);
@@ -12,7 +11,6 @@ const UserProfile = () => {
     const [selectedResult, setSelectedResult] = useState(null);
     const [username, setUsername] = useState('');
     const token = localStorage.getItem('token');
-    const [universities, setUniversities] = useState([]);
 
     useEffect(() => {
         axios.get('http://127.0.0.1:8000/api/user/', {
@@ -38,14 +36,6 @@ const UserProfile = () => {
         .catch(error => {
             setError(error.response.data);
         });
-
-        axios.get('http://127.0.0.1:8000/api/universities/')
-            .then(response => {
-                setUniversities(response.data); // Get only the first 4 universities
-            })
-            .catch(error => {
-                console.error('There was an error fetching the universities!', error);
-            });
 
 
     }, [token]);
@@ -105,21 +95,19 @@ const UserProfile = () => {
             </div>
             <div className="profile-section">
                 <h3>Рекомендованные ВУЗы</h3>
-                <div className="profile-recommended-universities">
-                    <div className="profile-universities-grid">
-                        {universities.map(university => (
-                            <div key={university.id} className="profile-university-card">
-                                <Link to={`/universities/${university.id}`}>
-                                    <img src={university.image} alt={university.name} className="profile-university-image" />
-                                    <div className="profile-university-info">
-                                        <h3>{university.name}</h3>
-                                        <p>{university.address}</p>
-                                    </div>
-                                </Link>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                <ul>
+                    {profile.recommended_universities.map(university => (
+                        <li key={university.id}>
+                            <h4>{university.name}</h4>
+                            <p>{university.description}</p>
+                            <p>Рейтинг: {university.rating}</p>
+                            <p>Адрес: {university.address}</p>
+                            <p>Язык обучения: {university.language_of_instruction}</p>
+                            <p>Контакты: {university.contact_number}, {university.email}</p>
+                            <p>Вебсайт: <a href={university.website} target="_blank" rel="noopener noreferrer">{university.website}</a></p>
+                        </li>
+                    ))}
+                </ul>
             </div>
 
             <Modal show={showModal} onHide={handleCloseModal}>

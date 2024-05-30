@@ -10,7 +10,6 @@ const Result = () => {
     const [subjectPoints, setSubjectPoints] = useState({});
     const [username, setUsername] = useState('');
     const token = localStorage.getItem('token');
-    const [universities, setUniversities] = useState([]);
 
     useEffect(() => {
         axios.get('http://127.0.0.1:8000/api/user/', {
@@ -49,13 +48,6 @@ const Result = () => {
             console.error(error);
         });
 
-        axios.get('http://127.0.0.1:8000/api/universities/')
-            .then(response => {
-                setUniversities(response.data); // Get only the first 4 universities
-            })
-            .catch(error => {
-                console.error('There was an error fetching the universities!', error);
-            });
 
     }, [token]);
 
@@ -146,19 +138,19 @@ const Result = () => {
             )}
             <div className="recommended-universities">
                 <h3>Рекомендуемые ВУЗы для категории: {topCategory}</h3>
-                <div className="universities-grid">
-                    {universities.map(university => (
-                        <div key={university.id} className="university-card">
-                            <Link to={`/universities/${university.id}`}>
-                                <img src={university.image} alt={university.name} className="university-image" />
-                                <div className="university-info">
-                                    <h3>{university.name}</h3>
-                                    <p>{university.address}</p>
-                                </div>
-                            </Link>
-                        </div>
+                <ul>
+                    {result.universities.map(university => (
+                        <li key={university.id}>
+                            <h4>{university.name}</h4>
+                            <p>{university.description}</p>
+                            <p>Рейтинг: {university.rating}</p>
+                            <p>Адрес: {university.address}</p>
+                            <p>Язык обучения: {university.language_of_instruction}</p>
+                            <p>Контакты: {university.contact_number}, {university.email}</p>
+                            <p>Вебсайт: <a href={university.website} target="_blank" rel="noopener noreferrer">{university.website}</a></p>
+                        </li>
                     ))}
-                </div>
+                </ul>
             </div>
         </div>
     );

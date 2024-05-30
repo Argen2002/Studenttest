@@ -190,3 +190,62 @@
 .universities-header a:hover {
     text-decoration: underline;
 }
+
+/* Адаптивные стили */
+@media (max-width: 1024px) {
+    .university-card {
+        width: calc(33.33% - 20px); /* 3 карточки в строке */
+    }
+}
+
+@media (max-width: 768px) {
+    .result-header h2 {
+        font-size: 20px;
+    }
+
+    .result-header p {
+        font-size: 16px;
+    }
+
+    .result-table th, .result-table td {
+        padding: 8px;
+    }
+
+    .category-description h3, .result-professions h3, .subject-selection h3 {
+        font-size: 18px;
+    }
+
+    .subject-test-link p, .subject-test-link a {
+        font-size: 14px;
+    }
+
+    .university-card {
+        width: calc(50% - 20px); /* 2 карточки в строке */
+    }
+}
+
+@media (max-width: 480px) {
+    .result-header h2 {
+        font-size: 18px;
+    }
+
+    .result-header p {
+        font-size: 14px;
+    }
+
+    .result-table th, .result-table td {
+        padding: 6px;
+    }
+
+    .category-description h3, .result-professions h3, .subject-selection h3 {
+        font-size: 16px;
+    }
+
+    .subject-test-link p, .subject-test-link a {
+        font-size: 12px;
+    }
+
+    .university-card {
+        width: 100%; /* 1 карточка в строке */
+    }
+}

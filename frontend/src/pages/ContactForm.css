@@ -6,6 +6,7 @@
     border-radius: 10px;
     background-color: #f9f9f9;
     margin-top: -50px;
+
 }
 
 h2 {
@@ -72,4 +73,27 @@ input[type="file"] {
 
 .error-message {
     color: red;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .contact-form-container {
+        padding: 15px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea,
+    input[type="file"] {
+        padding: 8px;
+    }
+
+    .btn {
+        padding: 8px;
+        font-size: 14px;
+    }
 }

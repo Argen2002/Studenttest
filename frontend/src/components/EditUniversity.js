@@ -92,9 +92,11 @@ const EditUniversity = () => {
         formData.append('budget', budget);
         formData.append('mission_and_goals', missionAndGoals);
         formData.append('threshold_ort', thresholdOrt);
+
         selectedCategories.forEach(category => {
             formData.append('categories', category);
         });
+
         selectedProfessions.forEach(profession => {
             formData.append('professions', profession);
         });
@@ -234,7 +236,7 @@ const EditUniversity = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label>Пароговый орт на поступление</label>
+                    <label>Пороговый ОРТ на поступление</label>
                     <input
                         type="number"
                         value={thresholdOrt}

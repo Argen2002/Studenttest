@@ -6,7 +6,7 @@
 
 .about-header {
     display: flex;
-    justify-content: start;
+    justify-content: center;
     align-items: start;
     margin-bottom: 40px;
 }
@@ -25,7 +25,7 @@
     align-items: center;
 }
 
-.about-content-h2{
+.about-content-h2 {
     text-align: left;
     display: flex;
     justify-content: center;
@@ -57,8 +57,6 @@
     margin-bottom: 20px;
 }
 
-
-
 .project-goals ul {
     list-style-type: none;
     padding: 0;
@@ -80,4 +78,47 @@
     top: 0;
     font-size: 24px;
     line-height: 1;
+}
+
+/* Медиазапросы для обеспечения адаптивности */
+@media (max-width: 768px) {
+    .about-header h1 {
+        font-size: 28px;
+        margin-bottom: 0;
+    }
+
+    .about-content h2, .about-content .highlight {
+        font-size: 24px;
+    }
+
+    .about-content p, .project-goals ul li {
+        font-size: 16px;
+    }
+
+    .about-content-h2 {
+        font-size: 1rem;
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-container {
+        padding: 10px;
+    }
+
+    .about-header h1 {
+        font-size: 24px;
+    }
+
+    .about-content h2, .about-content .highlight {
+        font-size: 20px;
+    }
+
+    .about-content p, .project-goals ul li {
+        font-size: 14px;
+    }
+
+    .about-content-h2 {
+        font-size: 0.8rem;
+    }
 }

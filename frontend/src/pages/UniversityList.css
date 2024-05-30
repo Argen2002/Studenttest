@@ -23,7 +23,7 @@
     background: white;
     border: 1px solid #ddd;
     border-radius: 10px;
-    width: 20%; /* Adjusted to fit 4 in a row */
+    width: 20%; /* 4 карточки в ряд */
     overflow: hidden;
     transition: transform 0.2s;
     text-align: left;
@@ -53,24 +53,31 @@
     color: #777;
     font-size: 14px;
     margin: 5px 0 0;
-
 }
 
-/* Media queries to ensure responsiveness */
+/* Медиазапросы для обеспечения адаптивности */
 @media (max-width: 1200px) {
     .university-card {
-        width: 30%; /* Adjusted to fit 3 in a row */
+        width: 30%; /* 3 карточки в ряд */
     }
 }
 
 @media (max-width: 992px) {
     .university-card {
-        width: 45%; /* Adjusted to fit 2 in a row */
+        width: 45%; /* 2 карточки в ряд */
+    }
+
+    .search-bar {
+        width: 70%; /* Увеличиваем ширину поисковой строки на средних экранах */
     }
 }
 
 @media (max-width: 768px) {
     .university-card {
-        width: 100%; /* Adjusted to fit 1 in a row */
+        width: 100%; /* 1 карточка в ряд */
+    }
+
+    .search-bar {
+        width: 90%; /* Увеличиваем ширину поисковой строки на малых экранах */
     }
 }

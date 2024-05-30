@@ -61,7 +61,7 @@ class UniversityCreateSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class UniversitySerializer(serializers.ModelSerializer):
+class UniversityReadSerializer(serializers.ModelSerializer):
     categories = CategorySerializer(many=True)
     professions = ProfessionSerializer(many=True)
     added_by = serializers.ReadOnlyField(source='added_by.username')
@@ -69,6 +69,16 @@ class UniversitySerializer(serializers.ModelSerializer):
     class Meta:
         model = University
         fields = '__all__'
+
+class UniversityWriteSerializer(serializers.ModelSerializer):
+    categories = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), many=True)
+    professions = serializers.PrimaryKeyRelatedField(queryset=Profession.objects.all(), many=True)
+    added_by = serializers.ReadOnlyField(source='added_by.username')
+
+    class Meta:
+        model = University
+        fields = '__all__'
+
 
 
 class SubjectSerializer(serializers.ModelSerializer):
@@ -155,7 +165,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
     def get_recommended_universities(self, obj):
         personality_type = self.get_personality_type(obj)
         universities = University.objects.filter(categories__name=personality_type)
-        return UniversitySerializer(universities, many=True).data
+        return UniversityWriteSerializer(universities, many=True).data
 
 
 class UserSerializer(serializers.ModelSerializer):

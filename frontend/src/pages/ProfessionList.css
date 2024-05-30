@@ -1,3 +1,4 @@
+/* Основные стили */
 .profession-list-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -49,4 +50,31 @@
     margin: 10px 0 0;
     font-size: 14px;
     color: #555;
+}
+
+/* Адаптивные стили */
+@media (max-width: 1024px) {
+    .profession-card {
+        flex: 1 1 calc(33.33% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .profession-card {
+        flex: 1 1 calc(50% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .profession-card {
+        flex: 1 1 100%;
+    }
+
+    .profession-info h3 {
+        font-size: 20px;
+    }
+
+    .profession-info p {
+        font-size: 14px;
+    }
 }
